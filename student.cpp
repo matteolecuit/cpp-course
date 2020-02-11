@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <utility>
 
 class Student {
   private:
@@ -12,10 +13,17 @@ class Student {
     }
 
     Student(const Student& otherStudent) {
-      std::cout << "Creating a clone of another student" << std::endl;
+      std::cout << "Copy Constructing student" << std::endl;
       this->numberOfGrades = otherStudent.numberOfGrades;
       this->grades = new float[30];
       std::memcpy(this->grades, otherStudent.grades, 30 * sizeof(float));
+    }
+
+    Student& operator = (Student otherStudent) {
+      std::cout << "Copy Assigning student" << std::endl;
+      this->numberOfGrades = otherStudent.numberOfGrades;
+      std::swap(this->grades, otherStudent.grades);
+      return *this;
     }
 
     void addGrade(float newGrade) {
@@ -42,7 +50,8 @@ int main() {
   s1.addGrade(12.2);
   s1.addGrade(14.6);
   s1.addGrade(4.6);
-  Student s2(s1);
+  Student s2;
+  s2 = s1;
   std::cout << s1.getGradesAverage() << std::endl;
   return 0;
 }
