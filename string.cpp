@@ -54,6 +54,8 @@ string string::operator + (const char * other) {
 
 string string::operator + (string& other) {
   return *this + other.data;
-}std::ostream& operator<<(std::ostream& os, const string& str) {
+}
+
+std::ostream& operator<<(std::ostream& os, const string& str) {
   return os << str.data;
 }
