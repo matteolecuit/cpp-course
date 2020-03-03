@@ -29,7 +29,7 @@ class Student {
 
     Student(Student&& rStudent) {
       std::cout << "move" << std::endl;
-      this-> numberOfGrades = rStudent.numberOfGrades;
+      this->numberOfGrades = rStudent.numberOfGrades;
       this->grades = rStudent.grades;
       rStudent.grades = nullptr;
     }
