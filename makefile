@@ -10,5 +10,8 @@ string.o: string.cpp
 string.a: string.o
 	ar rcs string.a string.o
 
+string.so: string.o
+	g++ -shared -o string.so string.o
+	
 clean:
 	rm *.o main
