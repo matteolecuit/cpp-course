@@ -6,3 +6,9 @@ main.o: main.cpp
 
 string.o: string.cpp
 	g++ -c string.cpp -o string.o
+
+string.a: string.o
+	ar rcs string.a string.o
+
+clean:
+	rm *.o main
