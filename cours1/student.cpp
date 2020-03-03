@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <utility>
+#include <memory>
 
 class Student {
   private:
@@ -26,6 +27,13 @@ class Student {
       return *this;
     }
 
+    Student(Student&& rStudent) {
+      std::cout << "move" << std::endl;
+      this-> numberOfGrades = rStudent.numberOfGrades;
+      this->grades = rStudent.grades;
+      rStudent.grades = nullptr;
+    }
+    
     void addGrade(float newGrade) {
       this->grades[this->numberOfGrades] = newGrade;
       this->numberOfGrades++;
@@ -45,13 +53,48 @@ class Student {
     }
 };
 
-int main() {
-  Student s1;
-  s1.addGrade(12.2);
-  s1.addGrade(14.6);
-  s1.addGrade(4.6);
+void testPtrFun(std::shared_ptr<Student>& sPtr) {
+  sPtr->addGrade(8.0);
+};
+
+
+Student makeAverageStudent(){
   Student s2;
-  s2 = s1;
-  std::cout << s1.getGradesAverage() << std::endl;
-  return 0;
+  s2.addGrade(10);
+  s2.addGrade(10);
+  s2.addGrade(10);
+  return s2;
 }
+
+
+
+
+int main() {
+  /*
+  std::weak_ptr<Student> ws;
+  {
+    std::shared_ptr<Student> s1 = std::make_shared<Student>();
+    ws = s1;
+    s1->addGrade(12.2);
+    s1->addGrade(14.6);
+    s1->addGrade(4.6);
+    std::cout << "avg: " << s1->getGradesAverage() << std::endl;
+    std::cout << "use count: " << s1.use_count() << std::endl;
+
+    if(std::shared_ptr<Student> s2 = ws.lock()) {
+      std::cout << "Weak pointer valide"<< std::endl;
+    } else {
+      std::cout << "Weak pointer non valide"<< std::endl;
+    }
+  }
+
+  if(std::shared_ptr<Student> s2 = ws.lock()) {
+    std::cout << "Weak pointer valide"<< std::endl;
+  } else {
+    std::cout << "Weak pointer non valide"<< std::endl;
+  }
+*/
+  Student matteo;
+  matteo = makeAverageStudent();
+  return 0;
+};
