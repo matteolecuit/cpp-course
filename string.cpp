@@ -74,8 +74,6 @@ int main() {
   myString = myString2 + myString3;
   std::cout << myString.getChar() << std::endl;
 
-
-
   std::cout << "End" << std::endl;
   return 0;
 }
