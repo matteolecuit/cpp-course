@@ -1,5 +1,5 @@
-main: main.o string.o
-	g++  main.o string.o -o main
+main: main.o string.a
+	g++  main.o string.a -o main
 
 main.o: main.cpp
 	g++ -c main.cpp -o main.o
