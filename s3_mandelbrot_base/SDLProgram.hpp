@@ -16,7 +16,7 @@ class SDLProgram {
         SDLProgram(int width, int height);
         void display();
         void loop();
-        void updateLine(std::vector<unsigned char> line);
+        void updateLine(int lineNumber, std::vector<unsigned char> line);
         ~SDLProgram();
 };
 

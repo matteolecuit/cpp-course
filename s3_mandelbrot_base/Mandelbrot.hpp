@@ -23,8 +23,7 @@ class Mandelbrot {
           float yMin,
           float yMax,
           int maxIterations);
-        ~Mandelbrot();
-        std::vector<unsigned char> drawLine();
+        std::vector<unsigned char> drawLine(int lineNumber);
 };
 
 #endif

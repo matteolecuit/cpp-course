@@ -29,8 +29,18 @@ void SDLProgram::loop(){
 }
 
 void SDLProgram::display(){
-
+  SDL_RenderCopy(this->renderer, this->texture, nullptr, nullptr);
 }
+
+void SDLProgram::updateLine(int lineNumber, std::vector<unsigned char> linePixels) {
+  SDL_Rect r;
+  r.x = 0;
+  r.y = lineNumber;
+  r.w = this-> width;
+  r.h = 1;
+  SDL_UpdateTexture(this->texture, &r, &linePixels[0], this->width * 4);
+}
+
 
 SDLProgram::~SDLProgram(){
     SDL_DestroyRenderer(this->renderer);
