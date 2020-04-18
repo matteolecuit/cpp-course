@@ -1,4 +1,5 @@
 #include "./SDLProgram.hpp"
+#include <vector>
 
 SDLProgram::SDLProgram(int width, int height) {
   this->width = width;
@@ -9,6 +10,11 @@ SDLProgram::SDLProgram(int width, int height) {
     SDL_Window* window = nullptr;
     SDL_CreateWindowAndRenderer(width, height, 0, &window, &this->renderer);
   }
+}
+
+SDLProgram::~SDLProgram() {
+  SDL_DestroyRenderer(this->renderer);
+  SDL_Quit();
 }
 
 void SDLProgram::loop() {
@@ -27,13 +33,26 @@ void SDLProgram::loop() {
 }
 
 void SDLProgram::display() {
+  SDL_Texture *texture;
+  texture = SDL_CreateTexture(
+    renderer,
+    SDL_PIXELFORMAT_RGBA8888,
+    SDL_TEXTUREACCESS_STREAMING,
+    this->height,
+    this->width
+  );
 
+  std::vector<unsigned char> pixels(this->width*this->height*4);
+
+  SDL_UpdateTexture(
+    texture,
+    nullptr,
+    &pixels[0],
+    this->width * 4);
+  SDL_RenderCopy(renderer, texture, nullptr, nullptr);
 }
 
-SDLProgram::~SDLProgram() {
-  SDL_DestroyRenderer(this->renderer);
-  SDL_Quit();
-}
+
 
 
 

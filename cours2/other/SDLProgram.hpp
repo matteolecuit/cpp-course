@@ -10,9 +10,9 @@ class SDLProgram {
     SDL_Renderer* renderer = nullptr;
   public:
     SDLProgram(int width, int height);
+    ~SDLProgram();
     void display();
     void loop();
-    ~SDLProgram();
 };
 
 #endif
